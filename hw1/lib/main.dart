@@ -48,23 +48,55 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 2;
   List<int> numbers = [];
+  int index = 0, found = 0, _counter = 2;
 
-  void check_prime(int num){
-    int i,m=0,flag=0;
-    m=num~/2;
-    for(i = 2;i<=m;i++){
-      if(num%i == 0){
-        flag=1;
-        break;
+  int check_prime(int num) {
+    //_counter = i + 1;
+    // for (i = 2; i <= m; i++) {
+    //   if (num % i == 0) {
+    //     flag = 1;
+    //     break;
+    //   }
+    // }
+    int i = 2, m, flag = 1;
+    m = num ~/ 2;
+    while (i <= m) {
+      if (num % i == 0) {
+        flag = 0;
+        return flag;
       }
+      i++;
     }
-    if(flag==0){
+    return flag;
+  }
+
+  void get_prime(int num) {
+    found = 0;
+    //print('_counter $_counter');
+    int status = check_prime(num);
+    if (status == 1) {
       numbers.add(num);
+      find_next_prime(_counter);
+      //index++;
+      // _counter++;
       // print('num $num');
+    } else {
+      find_next_prime(_counter);
     }
   }
+
+  void find_next_prime(int num) {
+    //_counter = numbers.elementAt(index);
+    while (found == 0) {
+      _counter++;
+      //print('_counter $_counter');
+      if (check_prime(_counter) == 1) {
+        found = 1;
+      }
+    }
+  }
+
   void _incrementCounter() {
     setState(() {
       // This call to setState tells the Flutter framework that something has
@@ -72,8 +104,8 @@ class _MyHomePageState extends State<MyHomePage> {
       // so that the display can reflect the updated values. If we changed
       // _counter without calling setState(), then the build method would not be
       // called again, and so nothing would appear to happen.
-      check_prime(_counter);
-      _counter++;
+      get_prime(_counter);
+      //_counter++;
       // numbers.add(_counter);
     });
   }
