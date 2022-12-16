@@ -65,6 +65,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: const IconButton(onPressed: null, icon: Icon(Icons.menu),),
         title: Text(widget.title),
       ),
       body: Center(
@@ -75,6 +76,9 @@ class _MyHomePageState extends State<MyHomePage> {
               greetText(),
               style: Theme.of(context).textTheme.displayMedium,
             ),
+            const Image(
+          image: NetworkImage("https://www.techhub.in.th/wp-content/uploads/2021/05/5616.jpg"),
+        ),
           ],
         ),
       ),
@@ -83,6 +87,8 @@ class _MyHomePageState extends State<MyHomePage> {
         tooltip: 'login',
         child: const Icon(Icons.login),
       ),
+      bottomNavigationBar: BottomNavigationBar( items : const [BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'), 
+      BottomNavigationBarItem(icon:Icon(Icons.school), label: "School")],),
     );
   }
 }
