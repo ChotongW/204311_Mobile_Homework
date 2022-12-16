@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 
 void main() {
   runApp(const MyApp());
@@ -20,7 +21,7 @@ class MyApp extends StatelessWidget {
         brightness: Brightness.dark,
         /* dark theme settings */
       ),
-      themeMode: ThemeMode.dark, 
+      themeMode: ThemeMode.dark,
       /* ThemeMode.system to follow system theme, 
          ThemeMode.light for light theme, 
          ThemeMode.dark for dark theme
@@ -50,6 +51,13 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  List<String> images = [
+    "assets/images/s1.webp",
+    "assets/images/s2.webp",
+    "assets/images/s3.webp",
+    "assets/images/s4.webp",
+    "assets/images/s5.webp"
+  ];
   @override
   Widget build(BuildContext context) {
     // This method is rerun every time setState is called, for instance as done
@@ -60,24 +68,50 @@ class _MyHomePageState extends State<MyHomePage> {
     // than having to individually change instances of widgets.
     return Scaffold(
       appBar: AppBar(
-        leading: const IconButton(onPressed: null, icon: Icon(Icons.arrow_back_ios , color: Colors.pinkAccent ,),),
+        leading: const IconButton(
+          onPressed: null,
+          icon: Icon(
+            Icons.arrow_back_ios,
+            color: Colors.pinkAccent,
+          ),
+        ),
         centerTitle: true,
         title: Text(widget.title),
-        actions: [IconButton(onPressed: null, icon: Icon(Icons.ios_share_rounded)),
-        IconButton(onPressed: null, icon: Icon(Icons.favorite_border_outlined))],
-        
+        actions: [
+          IconButton(onPressed: null, icon: Icon(Icons.ios_share_rounded)),
+          IconButton(
+              onPressed: null, icon: Icon(Icons.favorite_border_outlined))
+        ],
       ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text(
-              "Aja Ae",
-              style: Theme.of(context).textTheme.displayMedium,
+            Align(
+              alignment: Alignment.topCenter,
+              child: CarouselSlider(
+                options: CarouselOptions(height: 200.0),
+                items: images.map((i) {
+                  return Builder(
+                    builder: (BuildContext context) {
+                      return Container(
+                        width: MediaQuery.of(context).size.width,
+                        margin: EdgeInsets.symmetric(horizontal: 5.0),
+                        child:
+                            // 'text $i',
+                            // style: TextStyle(fontSize: 16.0),
+                            Image.asset(
+                          i,
+                          fit: BoxFit.cover,
+                        ),
+                      );
+                    },
+                  );
+                }).toList(),
+              ),
             ),
-            const Image(
-          image: NetworkImage("https://www.techhub.in.th/wp-content/uploads/2021/05/5616.jpg"),
-        ),
+
+            // Image.asset(images[0], width: 300, height: 100)
           ],
         ),
       ),
@@ -86,8 +120,21 @@ class _MyHomePageState extends State<MyHomePage> {
       //   tooltip: 'login',
       //   child: const Icon(Icons.login),
       // ),
-      bottomNavigationBar: BottomNavigationBar( items : const [BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'), 
-      BottomNavigationBarItem(icon:Icon(Icons.school), label: "School")],),
+      bottomNavigationBar: Container(
+        height: 60,
+        color: Colors.blueAccent,
+        child: InkWell(
+          onTap: () => print('Select room'),
+          child: Padding(
+            padding: EdgeInsets.only(top: 20.0),
+            child: Column(
+              children: const <Widget>[
+                Text('Select a room', textAlign: TextAlign.center),
+              ],
+            ),
+          ),
+        ),
+      ),
     );
   }
 }
