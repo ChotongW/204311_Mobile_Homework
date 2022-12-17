@@ -77,7 +77,7 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
         centerTitle: true,
         title: Text(widget.title),
-        actions: [
+        actions: const [
           IconButton(onPressed: null, icon: Icon(Icons.ios_share_rounded)),
           IconButton(
               onPressed: null, icon: Icon(Icons.favorite_border_outlined))
@@ -110,8 +110,178 @@ class _MyHomePageState extends State<MyHomePage> {
                 }).toList(),
               ),
             ),
-
-            // Image.asset(images[0], width: 300, height: 100)
+            Container(
+              padding: const EdgeInsets.only(left: 10, top: 20),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  const Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text("UNESCO Sustainable Travel Pledge"),
+                  ),
+                  SizedBox(height: 10),
+                  const Text(
+                    'Shangri-La Chiang Mai',
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
+                  ),
+                  Container(
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Icon(
+                          Icons.star,
+                          color: Colors.grey[500],
+                        ),
+                        Icon(
+                          Icons.star,
+                          color: Colors.grey[500],
+                        ),
+                        Icon(
+                          Icons.star,
+                          color: Colors.grey[500],
+                        ),
+                        Icon(
+                          Icons.star,
+                          color: Colors.grey[500],
+                        ),
+                        Icon(
+                          Icons.star,
+                          color: Colors.grey[500],
+                        ),
+                      ],
+                    ),
+                  ),
+                  const Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      'Luxury hotel with free water park, near Chiang Mai Night Bazaar',
+                      style: TextStyle(
+                          fontWeight: FontWeight.normal, fontSize: 20),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Container(
+              padding: const EdgeInsets.only(left: 10, top: 50),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  const Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text("9.0/10 Superb",
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 20)),
+                  ),
+                  const SizedBox(height: 10),
+                  const Text(
+                    '1,000 verified Hotels.com guest reviews',
+                    style:
+                        TextStyle(fontWeight: FontWeight.normal, fontSize: 15),
+                  ),
+                  TextButton(
+                    onPressed: null,
+                    style: TextButton.styleFrom(
+                      primary: Colors.purpleAccent,
+                      onSurface: Colors.blue,
+                    ),
+                    child: const Text(
+                      'See all 1,000 reviews  >',
+                      style: TextStyle(
+                          fontWeight: FontWeight.normal, fontSize: 15),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Container(
+              padding: const EdgeInsets.only(left: 10, top: 10),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  const Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text("Popular amenities",
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 20)),
+                  ),
+                  const SizedBox(height: 10),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: const <Widget>[
+                          Icon(
+                            Icons.wifi,
+                            color: Colors.white,
+                          ),
+                          SizedBox(width: 10),
+                          Text("Free WiFi",
+                              style: TextStyle(
+                                  fontWeight: FontWeight.normal, fontSize: 15)),
+                          SizedBox(width: 90),
+                          Icon(
+                            Icons.pool,
+                            color: Colors.white,
+                          ),
+                          SizedBox(width: 10),
+                          Text("Pool",
+                              style: TextStyle(
+                                  fontWeight: FontWeight.normal, fontSize: 15)),
+                        ],
+                      ),
+                      const SizedBox(height: 10),
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: const <Widget>[
+                          Icon(
+                            Icons.ac_unit_sharp,
+                            color: Colors.white,
+                          ),
+                          SizedBox(width: 10),
+                          Text("Air Conditioning",
+                              style: TextStyle(
+                                  fontWeight: FontWeight.normal, fontSize: 15)),
+                          SizedBox(width: 45),
+                          Icon(
+                            Icons.drive_eta,
+                            color: Colors.white,
+                          ),
+                          SizedBox(width: 10),
+                          Text("Free Parking",
+                              style: TextStyle(
+                                  fontWeight: FontWeight.normal, fontSize: 15)),
+                        ],
+                      ),
+                      const SizedBox(height: 10),
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: const <Widget>[
+                          Icon(
+                            Icons.fitness_center,
+                            color: Colors.white,
+                          ),
+                          SizedBox(width: 10),
+                          Text("Gym",
+                              style: TextStyle(
+                                  fontWeight: FontWeight.normal, fontSize: 15)),
+                          SizedBox(width: 120),
+                          Icon(
+                            Icons.thermostat,
+                            color: Colors.white,
+                          ),
+                          SizedBox(width: 10),
+                          Text("Refrigerator",
+                              style: TextStyle(
+                                  fontWeight: FontWeight.normal, fontSize: 15)),
+                        ],
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
           ],
         ),
       ),
