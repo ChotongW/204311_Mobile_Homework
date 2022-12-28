@@ -1,17 +1,58 @@
 import 'package:flutter/material.dart';
 
+// int _favoritedCounter = 0;
 void main() {
   runApp(
     MyApp(
-      items: List<String>.generate(150, (i) => 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/${i+1}.png'), // generate a list of 150 Pokemon
+      items: List<String>.generate(
+          150,
+          (i) =>
+              'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/${i + 1}.png'), // generate a list of 150 Pokemon
     ),
   );
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   final List<String> items;
 
   const MyApp({super.key, required this.items});
+
+  @override
+  MyAppState createState() => MyAppState();
+}
+
+class MyAppState extends State<MyApp> {
+  bool _isFavorited = false;
+  int _favoritedCounter = 0;
+  late List<FavoriteWidget> favoritedList;
+
+  void _handleFavoritedChanged(bool isFavorited) {
+    if (isFavorited) {
+      setState(() {
+        _favoritedCounter++;
+        //_isFavorited = false;
+      });
+      // print('$isFavorited if');
+    } else {
+      setState(() {
+        _favoritedCounter--;
+        // _isFavorited = true;
+      });
+      // print('$isFavorited else');
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    favoritedList = List<FavoriteWidget>.generate(
+        150,
+        (i) => FavoriteWidget(
+              isFavorited: _isFavorited,
+              favoriteCount: _favoritedCounter,
+              onChanged: _handleFavoritedChanged,
+            ));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -21,34 +62,83 @@ class MyApp extends StatelessWidget {
       title: title,
       home: Scaffold(
         appBar: AppBar(
-          centerTitle: true, 
-          title: const Text(title),
+          centerTitle: true,
+          title: Text((() {
+            if (_favoritedCounter == 0) {
+              return title;
+            }
+
+            return "$title [$_favoritedCounter]";
+          })()),
         ),
         body: ListView.builder(
-          itemCount: items.length ~/ 3, // 3 items per row so we divide the number of items by 3
+          itemCount: widget.items.length ~/
+              3, // 3 items per row so we divide the number of items by 3
           itemBuilder: (context, index) {
+            // bool _isFavorited = savedLike.contains(widget.items[index * 3]);
+
             return Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Expanded(child: Stack( // Stack is for overlaying Favorite icon on top of image
+                Expanded(
+                    child: Stack(
+                  // Stack is for overlaying Favorite icon on top of image
                   children: [
-                    Image.network(items[index*3]),
-                    const IconButton(
-  
-  icon: const Icon(Icons.favorite_border, size : 50,color: Colors.black),
-  onPressed: (null) 
-),
+                    Image.network(widget.items[index * 3]),
+                    favoritedList[index * 3],
+                    // IconButton(
+                    //   icon: (_isFavorited
+                    //       ? const Icon(
+                    //           Icons.favorite,
+                    //           color: Colors.red,
+                    //           size: 50,
+                    //         )
+                    //       : const Icon(
+                    //           Icons.favorite_border,
+                    //           size: 50,
+                    //         )),
+                    //   color: Colors.black,
+                    //   iconSize: 50,
+                    //   onPressed: () {
+                    //     setState(() {
+                    //       if (_isFavorited) {
+                    //         _favoritedCounter--;
+                    //         _isFavorited = false;
+                    //         savedLike.remove(widget.items[index * 3]);
+                    //         print(savedLike);
+                    //       } else {
+                    //         savedLike.add(widget.items[index * 3]);
+                    //         _favoritedCounter++;
+                    //         _isFavorited = true;
+                    //         print(savedLike);
+                    //       }
+                    //     });
+                    //   },
+                    // ),
                   ],
                 )),
-                Expanded(child: Stack(
+                Expanded(
+                    child: Stack(
                   children: [
-                    Image.network(items[index*3+1]),
-                    const Icon(Icons.favorite_border, size: 50,),
+                    Image.network(widget.items[index * 3 + 1]),
+                    favoritedList[index * 3 + 1],
+                    // FavoriteWidget(
+                    //   isFavorited: _isFavorited,
+                    //   favoriteCount: _favoritedCounter,
+                    //   onChanged: _handleFavoritedChanged,
+                    // ),
                   ],
                 )),
-                Expanded(child: Stack(
+                Expanded(
+                    child: Stack(
                   children: [
-                    Image.network(items[index*3+2]),
-                    const Icon(Icons.favorite_border, size: 50,),
+                    Image.network(widget.items[index * 3 + 2]),
+                    favoritedList[index * 3 + 2],
+                    // FavoriteWidget(
+                    //   isFavorited: _isFavorited,
+                    //   favoriteCount: _favoritedCounter,
+                    //   onChanged: _handleFavoritedChanged,
+                    // ),
                   ],
                 )),
               ],
@@ -60,23 +150,49 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class FavoriteWidget extends StatefulWidget{
-  const FavoriteWidget({super.key});
+class FavoriteWidget extends StatefulWidget {
+  FavoriteWidget({
+    super.key,
+    this.isFavorited = false,
+    this.favoriteCount = 0,
+    required this.onChanged,
+  });
+
+  final bool isFavorited;
+  final ValueChanged<bool> onChanged;
+  final int favoriteCount;
+
   @override
-  State<FavoriteWidget> createState() => _FavoriteWidgetState();
-
-
+  FavoriteState createState() => FavoriteState();
 }
 
-class _FavoriteWidgetState extends State<FavoriteWidget>{
-  bool _isFavorited = false;
+class FavoriteState extends State<FavoriteWidget> {
+  bool isfav = false;
+
+  void handleTap() {
+    setState(() {
+      isfav = !isfav;
+      widget.onChanged(isfav);
+      //_isFavorited = false;
+    });
+  }
+
   @override
-  Widget build(BuildContext context){
-    return(Row(children: [IconButton(
-  
-  icon: (_isFavorited ? const Icon(Icons.favorite): Icon(Icons.favorite_border)),
-  color: Colors.black,
-  onPressed: (){} 
-),],));
+  Widget build(BuildContext context) {
+    return (IconButton(
+      icon: (isfav
+          ? const Icon(
+              Icons.favorite,
+              color: Colors.red,
+              size: 50,
+            )
+          : const Icon(
+              Icons.favorite_border,
+              size: 50,
+            )),
+      color: Colors.black,
+      iconSize: 50,
+      onPressed: handleTap,
+    ));
   }
 }
