@@ -22,7 +22,6 @@ class MyApp extends StatefulWidget {
 }
 
 class MyAppState extends State<MyApp> {
-  bool _isFavorited = false;
   int _favoritedCounter = 0;
   late List<FavoriteWidget> favoritedList;
 
@@ -48,7 +47,6 @@ class MyAppState extends State<MyApp> {
     favoritedList = List<FavoriteWidget>.generate(
         150,
         (i) => FavoriteWidget(
-              isFavorited: _isFavorited,
               favoriteCount: _favoritedCounter,
               onChanged: _handleFavoritedChanged,
             ));
@@ -153,12 +151,10 @@ class MyAppState extends State<MyApp> {
 class FavoriteWidget extends StatefulWidget {
   FavoriteWidget({
     super.key,
-    this.isFavorited = false,
     this.favoriteCount = 0,
     required this.onChanged,
   });
 
-  final bool isFavorited;
   final ValueChanged<bool> onChanged;
   final int favoriteCount;
 
