@@ -85,7 +85,7 @@ class _MyHomePageState extends State<MyHomePage> {
         }
       }
       //print(districts);
-      //print(cities);
+      print(cities["Mueang Chiang Mai"]);
       // districts = listData;
     });
   }
@@ -199,9 +199,9 @@ class _MyHomePageState extends State<MyHomePage> {
                         return const Iterable<String>.empty();
                       } else {
                         return cities.keys.where((String option) {
-                          return option
+                          return cities.containsValue(option
                               .toLowerCase()
-                              .contains(textEditingValue.text.toLowerCase());
+                              .contains(textEditingValue.text.toLowerCase()));
                         });
                       }
                     },
