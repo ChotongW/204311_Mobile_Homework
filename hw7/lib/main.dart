@@ -54,8 +54,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
   var districts = <String>[];
   var tambons = <String>[];
-  Map<String, List<String>> dogsIvePet = {
-    'Golden Retriever': ['Cowboy', 'Jack'],
+  Map<String, List<String>> cities = {
+    // 'Golden Retriever': ['Cowboy', 'Jack'],
   };
 
   late String selected_dis;
@@ -74,26 +74,18 @@ class _MyHomePageState extends State<MyHomePage> {
     final rawData = await rootBundle.loadString("tambon_chiangmai.csv");
     List listData = const CsvToListConverter().convert(rawData);
 
-    print(listData.runtimeType);
-    print(tambons.runtimeType);
+    // print(listData.runtimeType);
+    // print(tambons.runtimeType);
     setState(() {
       for (var i = 1; i < listData.length; i++) {
-        // if (!dogsIvePet.containsKey(listData[i][1])) {
-        //   dogsIvePet[listData[i][1]] = [listData[i][0]];
-        // }
-        dogsIvePet[listData[i][1]] = [listData[i][0]];
-        //print(listData[i][1]);
-        // dogsIvePet.update(listData[i][1], (list) {
-        //   list.addAll(listData[i][0]);
-        //   ;
-        //   return list;
-        // });
-        // if (!tambons.contains(listData[i][0])) {
-        //   tambons.add(listData[i][0]);
-        // }
+        if (cities[listData[i][1]] == null) {
+          cities[listData[i][1]] = [listData[i][0]];
+        } else {
+          cities[listData[i][1]]?.add(listData[i][0]);
+        }
       }
       //print(districts);
-      print(dogsIvePet);
+      //print(cities);
       // districts = listData;
     });
   }
@@ -183,7 +175,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       if (textEditingValue.text == '') {
                         return const Iterable<String>.empty();
                       } else {
-                        return districts.where((String option) {
+                        return cities.keys.where((String option) {
                           return option
                               .toLowerCase()
                               .contains(textEditingValue.text.toLowerCase());
@@ -206,7 +198,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       if (textEditingValue.text == '') {
                         return const Iterable<String>.empty();
                       } else {
-                        return districts.where((String option) {
+                        return cities.keys.where((String option) {
                           return option
                               .toLowerCase()
                               .contains(textEditingValue.text.toLowerCase());
