@@ -32,7 +32,7 @@ class _MyPokemonAppState extends State<MyPokemonApp> {
     return Consumer<PokemonService>(
       builder: (_, pokemonService, __) {
         // print(pokemonService.currentType);
-        print(pokemonService.colorCustom);
+        // print(pokemonService.colorCustom);
         return MaterialApp(
           title: 'Pokemon Demo',
           theme: ThemeData(

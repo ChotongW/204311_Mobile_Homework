@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "529866034592",
+    "firebase_url": "https://hw07-63cad-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "hw07-63cad",
+    "storage_bucket": "hw07-63cad.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:529866034592:android:7d6bb2cecb5af3f0e628c5",
+        "android_client_info": {
+          "package_name": "com.example.hw7"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "529866034592-rhu09upsfvvtenini70i0vm7ma67hb93.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC3HgzCUlq7IHLnkjOjh08-06ySRA9_INs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "529866034592-rhu09upsfvvtenini70i0vm7ma67hb93.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "529866034592-pbr6cce4h1p5tno50hms56de2vo4gg9b.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.hw7"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
