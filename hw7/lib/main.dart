@@ -6,11 +6,11 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:csv/csv.dart';
 import 'dart:async' show Future;
 
-Future<void> main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
+void main() {
+  // WidgetsFlutterBinding.ensureInitialized();
+  // await Firebase.initializeApp(
+  //   options: DefaultFirebaseOptions.currentPlatform,
+  // );
   runApp(const MyApp());
 }
 
@@ -50,7 +50,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   final _formKey = GlobalKey<FormState>();
-  DatabaseReference ref = FirebaseDatabase.instance.ref("users/123");
+  // DatabaseReference ref = FirebaseDatabase.instance.ref();
 
   var districts = <String>[];
   var tambons = <String>[];
@@ -85,7 +85,7 @@ class _MyHomePageState extends State<MyHomePage> {
         }
       }
       //print(districts);
-      print(cities["Mueang Chiang Mai"]);
+      //print(cities["Mueang Chiang Mai"]);
       // districts = listData;
     });
   }
@@ -195,18 +195,17 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                   Autocomplete<String>(
                     optionsBuilder: (TextEditingValue textEditingValue) {
-                      if (textEditingValue.text == '') {
+                      if (textEditingValue.text.isEmpty) {
                         return const Iterable<String>.empty();
                       } else {
-                        return cities.keys.where((String option) {
-                          return cities.containsValue(option
-                              .toLowerCase()
-                              .contains(textEditingValue.text.toLowerCase()));
-                        });
+                        List<String> options = cities[selected_dis]!;
+                        return options.where((String option) => option
+                            .toLowerCase()
+                            .contains(textEditingValue.text.toLowerCase()));
                       }
                     },
                     onSelected: (String selection) {
-                      selected_dis = selection;
+                      selected_tam = selection;
                     },
                   ),
                   ElevatedButton(
@@ -216,11 +215,11 @@ class _MyHomePageState extends State<MyHomePage> {
                         ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(content: Text('Processing Data')),
                         );
-                        await ref.set({
-                          "name": "wasin",
-                          "age": 21,
-                          "address": {"line1": "100 Mountain View"}
-                        });
+                        // await ref.set({
+                        //   "name": "wasin",
+                        //   "age": 21,
+                        //   "address": {"line1": "100 Mountain View"}
+                        // });
                       }
                     },
                     child: const Text('Submit'),
