@@ -35,8 +35,7 @@ void main() {
 // provided http.Client.
     when(client.get(Uri.parse('https://api.genshin.dev/characters/albedo')))
         .thenAnswer((_) async => http.Response(
-            """{"name":"Albedo","vision":"Geo","weapon":"Sword","nation":"Mondstadt", 
-            "description":"A genius known as the Kreideprinz, he is the Chief Alchemist and Captain of the Investigation Team of the Knights of Favonius."}""",
+            '{"name":"Albedo","vision":"Geo","weapon":"Sword","nation":"Mondstadt","description":"A genius known as the Kreideprinz, he is the Chief Alchemist and Captain of the Investigation Team of the Knights of Favonius."}',
             200));
     expect(await fetchCharacterInfo(client, 'albedo'), isA<CharacterInfo>());
   });
