@@ -52,7 +52,7 @@ class _MyHomePageState extends State<MyHomePage> {
   var districts = <String>[];
   var tambons = <String>[];
   Map<String, List<String>> cities = {
-    // 'Golden Retriever': ['Cowboy', 'Jack'],
+    // 'district': ['tambon', 'tambon'],
   };
 
   late String selected_dis;
